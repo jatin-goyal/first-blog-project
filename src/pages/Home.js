@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 
 function Home({ isAuth }) {
   const [postsList, setPostsList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
+  // const q = query(citiesRef, orderBy("name"), limit(3));
 
   useEffect(() => {
     const getPostsList = async () => {
@@ -17,6 +25,8 @@ function Home({ isAuth }) {
 
   const deletePost = async (id) => {
     const userPost = doc(db, "posts", id);
+    console.log(userPost);
+    console.log(id);
     await deleteDoc(userPost);
   };
   return (

@@ -12,7 +12,10 @@ function CreatePost() {
   const postsCollectionRef = collection(db, "posts");
 
   const createPost = async () => {
+    let time = Date.now();
+
     await addDoc(postsCollectionRef, {
+      time,
       title,
       postText,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
