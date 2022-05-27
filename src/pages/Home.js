@@ -28,6 +28,8 @@ function Home({ isAuth }) {
     console.log(userPost);
     console.log(id);
     await deleteDoc(userPost);
+
+    window.location.reload(false);
   };
   return (
     <div className="homePage">
