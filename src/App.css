@@ -251,19 +251,15 @@ textarea {
   color: white;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
   .homePage .post {
     width: 280px;
-    margin: 20px 10px;
+    margin: 20px auto;
   }
 
   .cpContainer {
     width: 300px;
     padding: 15px;
-  }
-
-  .createPostPage {
-    margin-left: 0px;
   }
 
   .btn {
