@@ -143,10 +143,12 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .loginPage p {
   font-size: 30px;
+  color: white;
 }
 
 /* GOOGLE BUTTOn */
