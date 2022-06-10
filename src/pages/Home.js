@@ -14,22 +14,21 @@ function Home({ isAuth }) {
   const postsCollectionRef = collection(db, "posts");
   // const q = query(citiesRef, orderBy("name"), limit(3));
 
-  useEffect(() => {
-    const getPostsList = async () => {
-      const data = await getDocs(postsCollectionRef);
-      setPostsList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
+  const getPostsList = async () => {
+    const data = await getDocs(postsCollectionRef);
+    setPostsList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
 
+  useEffect(() => {
     getPostsList();
   }, []);
 
   const deletePost = async (id) => {
     const userPost = doc(db, "posts", id);
-    console.log(userPost);
-    console.log(id);
     await deleteDoc(userPost);
 
-    window.location.reload(false);
+    getPostsList();
+    // window.location.reload(false);
   };
   return (
     <div className="homePage">
@@ -41,7 +40,7 @@ function Home({ isAuth }) {
                 <h2>{post.title}</h2>
               </div>
               <div className="deletePost">
-                {isAuth && post.author.id === auth.currentUser.uid && (
+                {isAuth && post.author.id === auth.currentUser?.uid && (
                   <button onClick={() => deletePost(post.id)}>&#128465;</button>
                 )}
               </div>
