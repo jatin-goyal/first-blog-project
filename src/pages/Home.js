@@ -12,10 +12,10 @@ import { auth, db } from "../firebase-config";
 function Home({ isAuth }) {
   const [postsList, setPostsList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
-  // const q = query(citiesRef, orderBy("name"), limit(3));
+  const q = query(postsCollectionRef, orderBy("time", "desc"));
 
   const getPostsList = async () => {
-    const data = await getDocs(postsCollectionRef);
+    const data = await getDocs(q);
     setPostsList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 

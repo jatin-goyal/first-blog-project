@@ -13,7 +13,6 @@ function CreatePost() {
 
   const createPost = async () => {
     let time = serverTimestamp();
-    console.log(time);
 
     await addDoc(postsCollectionRef, {
       time,
