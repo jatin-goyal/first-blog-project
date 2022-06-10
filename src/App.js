@@ -48,6 +48,7 @@ function App() {
           </>
         )}
       </nav>
+      <div className="nav2"></div>
       <Routes>
         <Route path="/" element={<Home isAuth={isAuth} />} />
         <Route

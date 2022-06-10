@@ -6,13 +6,19 @@ body {
   padding: 0%;
   margin: 0%;
   font-family: Arial, Helvetica, sans-serif;
+  background: url("https://i.pinimg.com/originals/e8/d9/4e/e8d94e1e8b6b530ad315e9385290141b.jpg")
+    center center / cover no-repeat fixed;
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -1;
 }
 
 nav {
   margin: 0%;
   width: 100%;
   height: 80px;
-  background-color: black;
+  background: linear-gradient(rgba(2, 73, 101, 0.42), rgb(1, 28, 26));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +52,20 @@ nav {
   align-items: center;
   color: white;
   text-decoration: none;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+}
+.nav2 {
+  margin: 0;
+  width: 100%;
+  height: 80px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
 }
 
 a {
@@ -56,17 +76,19 @@ a {
 }
 
 .createPostPage {
-  width: 100%;
-  height: calc(100vh - 80px);
+  width: 80%;
+  min-height: calc(90vh - 80px);
   display: grid;
+  margin: 20px auto;
   place-items: center;
 }
 
 .cpContainer {
   width: 500px;
-  height: auto;
-  padding: 20px;
-  background-color: black;
+  min-height: 50%;
+  /* height: 100%; */
+  padding: 0px 20px 20px;
+  background-color: rgb(26, 26, 26);
   border-radius: 12px;
   color: white;
   display: flex;
@@ -174,13 +196,14 @@ textarea {
 }
 
 .homePage .post {
-  width: 600px;
+  width: 550px;
   height: auto;
   max-height: 600px;
-  background-color: rgb(250, 250, 250);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: rgb(251, 251, 251);
+  box-shadow: rgba(0, 0, 0, 0.24) 15px 15px 15px;
   margin: 20px;
   padding: 20px;
+  border: 1px solid rgb(52, 52, 52);
   border-radius: 15px;
 }
 
@@ -191,7 +214,7 @@ textarea {
 }
 
 .postHeader .title {
-  flex: 50%;
+  flex: 80%;
 }
 .postHeader .deletePost {
   flex: 50%;
@@ -217,16 +240,6 @@ textarea {
   overflow-y: auto;
 }
 
-@media only screen and (max-width: 600px) {
-  .homePage .post {
-    width: 300px;
-  }
-}
-
-/* .logOut_btn {
-  padding: 5px 10px;
-} */
-
 .btn {
   border: 1px solid rgba(250, 250, 250, 0.5);
   border-radius: 5px;
@@ -237,6 +250,31 @@ textarea {
   background-color: black;
   color: white;
 }
+
+@media only screen and (max-width: 400px) {
+  .homePage .post {
+    width: 280px;
+    margin: 20px 10px;
+  }
+
+  .cpContainer {
+    width: 300px;
+    padding: 15px;
+  }
+
+  .createPostPage {
+    margin-left: 0px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 5px 8px;
+  }
+}
+
+/* .logOut_btn {
+  padding: 5px 10px;
+} */
 
 .btn:hover {
   background-color: whitesmoke;

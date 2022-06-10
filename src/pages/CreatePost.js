@@ -6,10 +6,22 @@ import { useNavigate } from "react-router-dom";
 function CreatePost() {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
+  const [sharedImage, setSharedImage] = useState("");
 
   let navigate = useNavigate();
 
   const postsCollectionRef = collection(db, "posts");
+
+  const handleImage = (e) => {
+    const image = e.target.files[0];
+
+    if (image === "" || image === undefined) {
+      alert(`not an image , this file is ${typeof image}`);
+      return;
+    }
+
+    setSharedImage(image);
+  };
 
   const createPost = async () => {
     let time = serverTimestamp();
@@ -45,7 +57,12 @@ function CreatePost() {
             }}
           />
         </div>
+        {/* <div className="inputGp">
+          <label htmlFor="file">image:</label>
+          <input type="file" accept="image/jpeg" onChange={handleImage} />
 
+          {sharedImage && <img src={URL.createObjectURL(sharedImage)} />}
+        </div> */}
         <button onClick={createPost}>Submit Post</button>
       </div>
     </div>
