@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,8 @@ function CreatePost() {
   const postsCollectionRef = collection(db, "posts");
 
   const createPost = async () => {
-    let time = Date.now();
+    let time = serverTimestamp();
+    console.log(time);
 
     await addDoc(postsCollectionRef, {
       time,
