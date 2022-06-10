@@ -45,6 +45,7 @@ function CreatePost() {
             }}
           />
         </div>
+
         <button onClick={createPost}>Submit Post</button>
       </div>
     </div>
