@@ -10,8 +10,10 @@ import {
 import { auth, db } from "../firebase-config";
 import { IconButton } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 function Home({ isAuth }) {
+  const navigate = useNavigate();
   const [postsList, setPostsList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
   const q = query(postsCollectionRef, orderBy("time", "desc"));

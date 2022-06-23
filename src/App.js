@@ -7,6 +7,8 @@ import CreatePost from "./pages/CreatePost";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase-config";
 import { Navigate } from "react-router-dom";
+import { Update } from "@mui/icons-material";
+import UpdatePost from "./pages/UpdatePost";
 
 function App() {
   const [isAuth, setisAuth] = useState(localStorage.getItem("isAuth"));
@@ -56,6 +58,14 @@ function App() {
           element={
             <ProtectedRoute>
               <CreatePost />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/updatepost/:id"
+          element={
+            <ProtectedRoute>
+              <UpdatePost />
             </ProtectedRoute>
           }
         />

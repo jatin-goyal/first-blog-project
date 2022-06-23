@@ -3,7 +3,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 
-function CreatePost() {
+function UpdatePost() {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
   const [sharedImage, setSharedImage] = useState("");
@@ -11,17 +11,6 @@ function CreatePost() {
   let navigate = useNavigate();
 
   const postsCollectionRef = collection(db, "posts");
-
-  const handleImage = (e) => {
-    const image = e.target.files[0];
-
-    if (image === "" || image === undefined) {
-      alert(`not an image , this file is ${typeof image}`);
-      return;
-    }
-
-    setSharedImage(image);
-  };
 
   const createPost = async () => {
     let time = serverTimestamp();
@@ -57,16 +46,11 @@ function CreatePost() {
             }}
           />
         </div>
-        {/* <div className="inputGp">
-          <label htmlFor="file">image:</label>
-          <input type="file" accept="image/jpeg" onChange={handleImage} />
 
-          {sharedImage && <img src={URL.createObjectURL(sharedImage)} />}
-        </div> */}
-        <button onClick={createPost}>Submit Post</button>
+        <button onClick={createPost}>Update Post</button>
       </div>
     </div>
   );
 }
 
-export default CreatePost;
+export default UpdatePost;
