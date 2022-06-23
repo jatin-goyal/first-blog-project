@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import { IconButton } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 
 function Home({ isAuth }) {
   const [postsList, setPostsList] = useState([]);
@@ -32,6 +32,10 @@ function Home({ isAuth }) {
     getPostsList();
     // window.location.reload(false);
   };
+
+  const updatePost = async (id) => {
+    const userPost = doc(db, "posts", id);
+  };
   return (
     <div className="homePage">
       {postsList.map((post) => {
@@ -44,12 +48,10 @@ function Home({ isAuth }) {
               {isAuth && post.author.id === auth.currentUser?.uid && (
                 <div className="postOptions">
                   <IconButton>
-                    <button onClick={() => deletePost(post.id)}>
-                      &#128465;
-                    </button>
+                    <Edit onClick={() => updatePost(post.id)} />
                   </IconButton>
                   <IconButton>
-                    <Delete onClick={() => deletePost(post.id)}></Delete>
+                    <Delete onClick={() => deletePost(post.id)} />
                   </IconButton>
                 </div>
               )}
