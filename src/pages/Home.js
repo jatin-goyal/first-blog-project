@@ -8,6 +8,8 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
+import { IconButton } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 
 function Home({ isAuth }) {
   const [postsList, setPostsList] = useState([]);
@@ -39,11 +41,24 @@ function Home({ isAuth }) {
               <div className="title">
                 <h2>{post.title}</h2>
               </div>
-              <div className="deletePost">
+              {isAuth && post.author.id === auth.currentUser?.uid && (
+                <div className="postOptions">
+                  <IconButton>
+                    <button onClick={() => deletePost(post.id)}>
+                      &#128465;
+                    </button>
+                  </IconButton>
+                  <IconButton>
+                    <Delete onClick={() => deletePost(post.id)}></Delete>
+                  </IconButton>
+                </div>
+              )}
+
+              {/* <div className="deletePost">
                 {isAuth && post.author.id === auth.currentUser?.uid && (
                   <button onClick={() => deletePost(post.id)}>&#128465;</button>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="postTextContainer">{post.postText}</div>
             <h4>@{post.author.name}</h4>
