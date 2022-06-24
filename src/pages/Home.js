@@ -56,14 +56,13 @@ function Home({ isAuth }) {
                   </IconButton>
                 </div>
               )}
-
-              {/* <div className="deletePost">
-                {isAuth && post.author.id === auth.currentUser?.uid && (
-                  <button onClick={() => deletePost(post.id)}>&#128465;</button>
-                )}
-              </div> */}
             </div>
-            <div className="postTextContainer">{post.postText}</div>
+            <div
+              className="postTextContainer"
+              style={{ whiteSpace: "pre-wrap" }}
+            >
+              {post.postText}
+            </div>
             <h4>@{post.author.name}</h4>
           </div>
         );
