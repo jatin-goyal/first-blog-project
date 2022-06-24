@@ -35,9 +35,8 @@ function Home({ isAuth }) {
     // window.location.reload(false);
   };
 
-  const updatePost = async (id) => {
-    const userPost = doc(db, "posts", id);
-  };
+  const updatePost = (id) => {};
+
   return (
     <div className="homePage">
       {postsList.map((post) => {
@@ -50,7 +49,7 @@ function Home({ isAuth }) {
               {isAuth && post.author.id === auth.currentUser?.uid && (
                 <div className="postOptions">
                   <IconButton>
-                    <Edit onClick={() => updatePost(post.id)} />
+                    <Edit onClick={() => navigate(`/updatepost/` + post.id)} />
                   </IconButton>
                   <IconButton>
                     <Delete onClick={() => deletePost(post.id)} />

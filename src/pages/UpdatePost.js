@@ -1,36 +1,52 @@
-import React, { useState } from "react";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db, auth } from "../firebase-config";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
+import { useNavigate, useParams } from "react-router-dom";
 
 function UpdatePost() {
+  const { id } = useParams();
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
-  const [sharedImage, setSharedImage] = useState("");
 
   let navigate = useNavigate();
 
   const postsCollectionRef = collection(db, "posts");
 
-  const createPost = async () => {
-    let time = serverTimestamp();
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const docRef = await doc(postsCollectionRef, id);
+      const docSnap = await getDoc(docRef);
 
-    await addDoc(postsCollectionRef, {
-      time,
-      title,
-      postText,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        setTitle(docSnap.data().title);
+        setPostText(docSnap.data().postText);
+      } else {
+        console.log("No such document!");
+      }
+    };
+
+    getUserInfo();
+  }, [id]);
+
+  const updatePost = async () => {
+    const docRef = await doc(postsCollectionRef, id);
+    await updateDoc(docRef, {
+      title: title,
+      postText: postText,
     });
+
     navigate("/");
   };
 
   return (
     <div className="createPostPage">
       <div className="cpContainer">
-        <h1>Create A Post</h1>
+        <h1>Update the Post</h1>
         <div className="inputGp">
           <label>Title:</label>
           <input
+            value={title}
             placeholder="title..."
             onChange={(event) => {
               setTitle(event.target.value);
@@ -40,6 +56,7 @@ function UpdatePost() {
         <div className="inputGp">
           <label>Post:</label>
           <textarea
+            value={postText}
             placeholder="post..."
             onChange={(event) => {
               setPostText(event.target.value);
@@ -47,7 +64,7 @@ function UpdatePost() {
           />
         </div>
 
-        <button onClick={createPost}>Update Post</button>
+        <button onClick={updatePost}>UpdatePost</button>
       </div>
     </div>
   );
